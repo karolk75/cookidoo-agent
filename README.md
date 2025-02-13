@@ -11,12 +11,9 @@ Cookidoo Agent is a sophisticated Python application that integrates the OpenAI 
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-  - [Querying Recipes](#querying-recipes)
   - [Loading Recipes into Milvus](#loading-recipes-into-milvus)
-- [Logging](#logging)
+  - [Querying Recipes](#querying-recipes)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Overview
 
