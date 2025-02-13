@@ -1,0 +1,8 @@
+aiofiles
+aiohttp
+asyncio
+cookidoo-api
+fastapi[standard]
+openai
+pymilvus
+python-dotenv
