@@ -2,7 +2,8 @@ aiofiles
 aiohttp
 asyncio
 cookidoo-api
-fastapi[standard]
+fastapi[all]
 openai
 pymilvus
 python-dotenv
+ruff
