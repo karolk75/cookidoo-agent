@@ -1,6 +1,6 @@
 import asyncio
+import logging
 
-from fastapi import logger
 from backend.cookidoo import Cookidoo
 from backend.cookidoo.types import CookidooShoppingRecipeDetails
 from backend.services.openai_service import (
@@ -8,6 +8,8 @@ from backend.services.openai_service import (
     get_openai_embedding,
     get_re_ranked_recipe,
 )
+
+logger = logging.getLogger(__name__)
 
 REQUEST_TIMEOUT = 5
 
@@ -24,7 +26,7 @@ async def query_recipes_service(query: str, top_k: int = 10) -> str:
     if not retrieved_texts:
         return "Nie znaleziono przepisów pasujących do zapytania."
     context = "\n\n".join(retrieved_texts)
-    answer = get_re_ranked_recipe(query, extracted_criteria, context)
+    answer = await get_re_ranked_recipe(query, extracted_criteria, context)
     return answer
 
 

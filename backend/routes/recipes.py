@@ -1,6 +1,10 @@
+import logging
 from fastapi import APIRouter, BackgroundTasks, HTTPException
+
 from ..models.schemas import BuildIndexResponse, QueryRequest, QueryResponse
 from ..services.recipe_service import load_vector_database, query_recipes_service
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -22,4 +26,5 @@ async def query_recipe_endpoint(request: QueryRequest):
         answer = await query_recipes_service(request.query)
         return QueryResponse(answer=answer)
     except Exception as e:
+        logger.info(f"Error quering recipes: {e}")
         raise HTTPException(status_code=500, detail=str(e))

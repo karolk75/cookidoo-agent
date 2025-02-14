@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     milvus_host: str = "127.0.0.1"
     milvus_port: str = "19530"
     collection_name: str = "recipes_collection"
+    cors_origin: str = "http://localhost:3000"
 
 
 settings = Settings()
