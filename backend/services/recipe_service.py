@@ -3,7 +3,6 @@ import asyncio
 from fastapi import logger
 from backend.cookidoo import Cookidoo
 from backend.cookidoo.types import CookidooShoppingRecipeDetails
-from backend.services.milvus_service import query_collection, run_initial_load
 from backend.services.openai_service import (
     extract_query_criteria,
     get_openai_embedding,
@@ -14,6 +13,8 @@ REQUEST_TIMEOUT = 5
 
 
 async def query_recipes_service(query: str, top_k: int = 10) -> str:
+    from backend.services.milvus_service import query_collection
+    
     extracted_criteria = await extract_query_criteria(query)
     condensed_query = f"{query}. Kryteria: {extracted_criteria}."
     query_embedding = await get_openai_embedding(condensed_query)
@@ -28,6 +29,8 @@ async def query_recipes_service(query: str, top_k: int = 10) -> str:
 
 
 def load_vector_database():
+    from backend.services.milvus_service import run_initial_load
+    
     asyncio.create_task(run_initial_load())
 
 
