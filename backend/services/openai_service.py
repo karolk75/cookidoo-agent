@@ -1,6 +1,9 @@
-from fastapi import logger
 import openai
+import logging
+
 from ..config import settings
+
+logger = logging.getLogger(__name__)
 
 # Ustawienie klucza API
 openai.api_key = settings.openai_api_key
@@ -49,7 +52,7 @@ async def extract_query_criteria(query: str) -> str:
         return query
 
 
-def get_re_ranked_recipe(query: str, extracted_criteria: str, context: str) -> str:
+async def get_re_ranked_recipe(query: str, extracted_criteria: str, context: str) -> str:
     final_prompt = (
         "Na podstawie poniższych przepisów i zapytania, wybierz te, które najlepiej spełniają kryteria. "
         "Przepis powinien zawierać nazwę, składniki, kroki przygotowania, kaloryczność i czas przygotowania. "
@@ -67,7 +70,7 @@ def get_re_ranked_recipe(query: str, extracted_criteria: str, context: str) -> s
         {"role": "user", "content": final_prompt},
     ]
     try:
-        response = client.chat.completions.create(
+        response = await client.chat.completions.create(
             model=settings.openai_recipe_ranking_model,
             messages=messages,
             temperature=0.5,

@@ -1,7 +1,6 @@
 aiofiles
 aiohttp
 asyncio
-cookidoo-api
 fastapi[all]
 openai
 pymilvus

@@ -1,5 +1,5 @@
 import aiohttp
-from fastapi import logger
+import logging
 from pymilvus import (
     connections,
     FieldSchema,
@@ -14,6 +14,8 @@ from backend.cookidoo.helpers import get_localization_options
 from backend.cookidoo.types import CookidooConfig
 from backend.services.recipe_service import process_recipes_batch
 from ..config import settings
+
+logger = logging.getLogger(__name__)
 
 
 def create_collection() -> Collection:
